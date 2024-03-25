@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block title %}
+    CodeManiacs | Problems
+{% endblock %}
+
+{% block inlineScripts %} 
+    <style>
+        .roundedCorner{
+            border-radius: 10px;
+        }
+        .equal{
+            display: block;
+        }
+        .bottom10{
+            margin-bottom: 10px;
+        }
+        .tableHeader th{
+            text-align:center;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="col-sm-12">
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="active"><a href="#Easy" data-toggle="tab">Easy</a></li>
+                        <li><a href="#Medium" data-toggle="tab">Medium</a></li>
+                        <li><a href="#Hard" data-toggle="tab">Hard</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="Easy" class="tab-pane fade in active">
+                            <div class="table-responsive">
+                                <table class="table table-condensed table-bordered table-hover roundedCorner">
+                                    <thead class="tableHeader">
+                                        <td>Title</td>
+                                        <td>ID</td>
+                                        <td>Submissions</td>
+                                        <td>Accuracy</td>
+                                    </thead>
+                                    {% for problem in problems %}
+                                        {% if problem.difficulty == "Easy" %}
+                                            <tr>
+                                                <td class="col-sm-9"> <td href="/problems/{{problem.id}}/"> {{problem.title}} </td>
+                                                <td class="col-sm-1" style="text-align:center;"> {{problem.id}} </td>
+                                                <td class="col-sm-1" style="text-align:center;"> {{problem.submissions}} </td>
+                                                <td class="col-sm-1" style="text-align:center;"> {{problem.accuracy}} </td>
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                        <div id="Medium" class="tab-pane fade in">
+                            <div class="table-responsive">
+                                <table class="table table-condensed table-bordered table-hover roundedCorner">
+                                    <thead class="tableHeader">
+                                        <td>Title</td>
+                                        <td>ID</td>
+                                        <td>Submissions</td>
+                                        <td>Accuracy</td>
+                                    </thead>
+                                    {% for problem in problems %}
+                                        {% if problem.difficulty == "Medium" %}
+                                            <tr>
+                                                <td class="col-sm-9"> <td href="/problems/{{problem.id}}/"> {{problem.title}} </td>
+                                                <td class="col-sm-1" style="text-align:center;"> {{problem.id}} </td>
+                                                <td class="col-sm-1" style="text-align:center;"> {{problem.submissions}} </td>
+                                                <td class="col-sm-1" style="text-align:center;"> {{problem.accuracy}} </td>
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                        <div id="Hard" class="tab-pane fade in">
+                            <div class="table-responsive">
+                                <table class="table table-condensed table-bordered table-hover roundedCorner">
+                                    <thead class="tableHeader">
+                                        <td>Title</td>
+                                        <td>ID</td>
+                                        <td>Submissions</td>
+                                        <td>Accuracy</td>
+                                    </thead>
+                                    {% for problem in problems %}
+                                        {% if problem.difficulty == "Hard" %}
+                                            <tr>
+                                                <td class="col-sm-9"> <td href="/problems/{{problem.id}}/"> {{problem.title}} </td>
+                                                <td class="col-sm-1" style="text-align:center;"> {{problem.id}} </td>
+                                                <td class="col-sm-1" style="text-align:center;"> {{problem.submissions}} </td>
+                                                <td class="col-sm-1" style="text-align:center;"> {{problem.accuracy}} </td>
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="table-responsive">
+                        <table class="table table-condensed table-bordered table-hover roundedCorner">
+                            <thead>
+                                <th>Title</td>
+                                <th>ID</td>
+                                <th>Submissions</td>
+                                <th>Accuracy</td>
+                            </thead>
+                            {% for problem in problems %}
+                                <tr>
+                                    <td class="col-sm-9"> <a href="/problems/{{problem.id}}/"> {{problem.title}} </td>
+                                    <td class="col-sm-1"> {{problem.id}} </td>
+                                    <td class="col-sm-1"> {{problem.submissions}} </td>
+                                    <td class="col-sm-1"> {{problem.accuracy}} </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>-->
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="col-sm-12">
+                        <div class="page-header">
+                            <h3>Popular Tags</h3>
+                        </div>
+                        <ul style="list-style-type:none; font-size:150%; margin-left:0px; padding-left:5px;">
+                            {% for badge,count in badgeCount.items %}
+                                <li style="margin-bottom:5px;">
+                                    <button class="btn btn-primary">
+                                        {{ badge }}&emsp;<span class="badge">{{ count }}</span>
+                                    </button>
+                                </li>    
+                            {% endfor %}
+                            <!--<li><a href="">#array</a></li>
+                            <li><a href="">#string</a></li>
+                            <li><a href="">#dp</a></li>
+                            <li><a href="">#greedy</a></li>
+                            <li><a href="">#implementation</a></li>
+                            <li><a href="">#graph</a></li>-->
+                        </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!--<div class="row">
+            <div class="col-sm-6">
+                <div class="col-sm-12 roundedCorner" style="background-color:bisque">
+                    Difficulty
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="col-sm-12 roundedCorner" style="background-color:bisque">
+                    topics
+                </div>
+            </div>
+        </div>
+            <div class="row bottom10 equal">
+                <div class="col-sm-3">
+                    <div class="col-sm-12  roundedCorner" style="background-color:aliceblue">
+                        <h2 class="navbar-text">Arrays</h3>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="col-sm-12  roundedCorner" style="background-color:aquamarine">
+                        <h2 class="navbar-text">Strings</h3>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="col-sm-12  roundedCorner" style="background-color:lemonchiffon">
+                        <h2 class="navbar-text">Linked Lists</h3>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="col-sm-12  roundedCorner" style="background-color:peachpuff">
+                        <h2 class="navbar-text">Greedy</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row bottom10 equal">
+                <div class="col-sm-3">
+                    <div class="col-sm-12  roundedCorner" style="background-color:aliceblue">
+                        <h2 class="navbar-text">Dynamic Programming</h3>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="col-sm-12  roundedCorner" style="background-color:aquamarine">
+                        <h2 class="navbar-text">Algorithms</h3>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="col-sm-12  roundedCorner" style="background-color:lemonchiffon">
+                        <h2 class="navbar-text">Graphs</h3>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="col-sm-12  roundedCorner" style="background-color:peachpuff">
+                        <h2 class="navbar-text">Trees</h3>
+                    </div>
+                </div>
+            </div>-->
+    </div>
+{% endblock %}

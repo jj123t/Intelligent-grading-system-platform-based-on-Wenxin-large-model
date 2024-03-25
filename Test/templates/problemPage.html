@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}
+    CodeManiacs | Profile
+{% endblock %}
+
+{% block inlineScripts %}
+    <style>
+        .roundedCorner{
+            border-radius: 10px;
+            background-color: #000;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="margin-bottom:100px">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="col-sm-12">
+                        <h1> {{problem.title}} </h1><hr>
+                        <p> {{ problem.description|safe }} </p>
+                        <hr>
+                        <h4><strong>Input</strong></h4>
+                        <p> {{ problem.inputDesc|safe }} </p>
+                        <hr>
+                        <h4><strong>Output</strong></h4>
+                        <p> {{ problem.outputDesc|safe }} </p>
+                        <hr>
+                        <h4><strong>Constraints</strong></h4>
+                        <p> {{ problem.constraints|safe }} </p>
+                        <hr>
+
+                        <!--<button class="btn btn-primary" href="">Submit</button>-->
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="col-sm-12">
+                        <!--<h3 class="page-header">Details</h3>-->
+
+                        <div class="well well-sm" style="border-radius:30px; background-color: white; border: 3px solid black; margin-top:75px;">
+                            <ul class="list-group">
+                            <li class="list-group-item" style="border:none; justify-content:space-around"> <strong>Problem setter :</strong> {{ problem.problemSetter|safe }} </li>
+                            <li class="list-group-item" style="border:none;"> <strong>Problem tester :</strong> {{ problem.problemTester|safe }} </li>
+                            <li class="list-group-item" style="border:none;"> <strong>Time limit :</strong> {{ problem.timeLimit }} secs</li>
+                            <li class="list-group-item" style="border:none;"> <strong>Publish date :</strong> {{ problem.publishDate }} </li>
+                            </ul>
+                        </div>
+                        <div class="well well-sm" style="padding:15px; border-radius:30px; background-color: white; border: 3px solid black;">
+
+                        <!--<div class="navbar-text">-->
+                            <form role="codeCheck" method="POST" action="/problems/{{ problem.id }}/submit/">
+                                {% csrf_token %}
+                                <label for="language">Language : </label>
+                                <select id="language" name="language" class="language btn btn-basic">
+                                    <option>C++ 4.3.0</option>
+                                    <option>Python 2.7</option>
+                                    <option>Python 3.0</option>
+                                </select>
+                                    <div style="text-align:center; margin-top:10px;">
+                                        <label class="btn btn-primary btn-block" for="my-file-selector">
+                                            Upload file
+                                        </label>
+                                        <input type="file" id="my-file-selector" name="codeFile" style="display:none;" onchange="$('#upload-file-info').html($(this).val());">
+                                        <span class="label label-danger" id="upload-file-info"></span>
+                                    </div>
+                                <br>
+                                <div style="text-align: center;">
+                                    <button class="btn btn-success" style="text-align: center;">
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        <!--</div>-->
+                        </div>
+                        <!--<div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" data-toggle = "dropdown">
+                                C++ 4.3.2
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>Python 2.7</li>
+                            </ul>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+    </div>
+{% endblock %}

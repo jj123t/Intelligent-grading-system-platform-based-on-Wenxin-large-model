@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}
+    CodeManiacs | Profile
+{% endblock %}
+
+{% block inlineScripts %}
+    <style>
+        .roundedCorner{
+            border-radius: 10px;
+        }
+        .profile{
+            margin: 0 auto;
+            border: 3px solid black;
+            margin-bottom: 20px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="margin-bottom: 150px;">
+            <div class="row">
+                <div class="col-sm-12 roundedCorner" style="border:3px solid black; padding:25px;">
+                    <div class="row">
+                        <div class="col-sm-4 text-center" style="word-wrap: break-word;">
+                            <span style="font-size:400%">{{ user.userprofile.user|title }}</span><br>
+                            <span class="text-muted" style="font-size:150%">{{ user.userprofile.country|title }}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <img class="img-responsive img-circle profile" src="/static/images/profile-icon-png-909.png" alt="Profile Picture" height="200px" width="200px">
+                            <form role="upload" method="POST" action="#">
+                                <div class="text-center" style="margin-bottom:50px;">
+                                    <label class="btn btn-primary" for="profile" style="margin:0 auto;">Change profile picture</label>
+                                    <input type="file" style="display:none;" id="profile"></input>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-4"></div>
+                    </div>
+
+                    <form class="form-inline">
+                        {% csrf_token %}
+                        <div class="form-group input-group">
+                            <label for="username">Username : </label>
+                            <input type="text" id="username" class="form-control" value="{{ user.userprofile.user }}" disabled="true"></input>
+                        </div>
+                        <div class="form-group input-group">
+                            <label for="institution">Institution : </label>
+                            <input type="text" id="institution" class="form-control" value="{{ user.userprofile.institution }}" disabled="true"></input>
+                        </div>
+                        <div class="form-group input-group">
+                            <label for="rating">Rating : </label>
+                            <input type="text" id="rating" class="form-control" value="{{ user.userprofile.rating }}" disabled="true"></input>
+                        </div>
+                        <div class="form-group input-group">
+                            <label for="submissions">Submissions : </label>
+                            <input type="text" id="submissions" class="form-control" value="{{ user.userprofile.noOfSubmissions }}" disabled="true"></input>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+{% endblock %}

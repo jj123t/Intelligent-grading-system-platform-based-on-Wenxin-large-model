@@ -1,0 +1,141 @@
+html,body{
+    margin: 0px;
+    background-color: mintcream;
+    padding:0;
+    height:100%;
+    position: relative;
+}
+
+ul{
+    background-color: seagreen;
+    overflow: hidden;
+    padding: 0px;
+    margin: 0px;
+    list-style-type: none;
+    font-family: 'Times New Roman', Times, serif;
+    text-transform: uppercase;
+}
+
+li{
+    float: left;
+}
+
+li a{
+    color: white;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    padding: 16px;
+}
+
+li a:hover{
+    background-color: mediumseagreen;
+}
+
+li.login{
+    float: right;
+}
+
+div.banner{
+    margin: 0px;
+    padding: 0px;
+    height: 90px;
+    font-family: Courier New, Courier, monospace;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 90px;
+    background-color: darkslategrey;
+    text-transform: uppercase;
+}
+
+/*div.recent{
+    position: relative;
+    margin-top: 50px;
+    margin-left: 110px;
+    margin-right: 110px;
+    height: 300px;
+    border: 3px solid black;
+}*/
+
+/*.divider{
+    margin-top: 10px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.lowerHalf{
+    overflow: auto;
+    width: 100%;
+    height: auto;
+}
+
+.leftHalf{
+    float: left;
+    width: 75%;
+}
+
+.rightHalf{
+    float: left;
+    width: 25%;
+}
+
+.newest{
+    margin-left: 25px;
+    padding-right: 20px;
+    border-right: 1px solid gray;
+    height: 500px;
+}
+
+.trending{
+    height: 400px;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 25px;
+}
+*/
+
+.signup{
+    margin: auto;
+    width: 400px;
+    /*border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;*/
+}
+
+input[type=text],input[type=email],input[type=password], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: seagreen;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: mediumseagreen;
+}
+
+footer{
+    text-align: center;
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.container{
+    overflow: auto;
+}

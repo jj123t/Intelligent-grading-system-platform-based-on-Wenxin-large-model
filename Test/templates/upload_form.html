@@ -1,0 +1,103 @@
+<!-- upload_form.html -->  
+  
+<!-- upload.html -->  
+<form method="post" enctype="multipart/form-data" id="upload-form">    
+    {% csrf_token %}    
+    {{ form.as_p }}    
+    <button type="submit">Upload</button>    
+</form>
+
+
+<div id="card-container">
+    <!-- 卡片将会在这里动态添加 -->
+</div>
+
+  
+<script>  
+document.getElementById('upload-form').addEventListener('submit', function(e) {  
+    e.preventDefault();  // 阻止表单默认的提交行为  
+    var form = this;  
+    var formData = new FormData(form);  
+  
+    // 使用AJAX发送表单数据  
+    fetch('/upload/', {  // 替换为你的上传URL  
+        method: 'POST',  
+        body: formData,  
+    })  
+    .then(response => response.json())  // 解析JSON响应  
+    .then(data => {  
+        // 创建新的卡片元素  
+        var img = document.createElement('img');
+        img.src = data.image_url;  
+        img.alt = 'Uploaded Image';  
+        img.classList.add('card-img');
+        
+        var card = document.createElement('div');  
+        card.classList.add('card');  // 假设你有一个CSS类叫.card  
+        
+        card.appendChild(img); 
+        
+        {#card.innerHTML = `<img src="${data.image_url}" alt="Uploaded Image">`;  #}
+
+        // 将新卡片添加到容器中  
+        document.getElementById('card-container').appendChild(card);  
+    })  
+    .catch(error => {  
+        console.error('Error uploading image:', error);  
+    });  
+});  
+</script>
+
+{##}
+{#<form method="post" enctype="multipart/form-data" id="upload-form">  #}
+{#    {% csrf_token %}  #}
+{#    {{ form.as_p }}  #}
+{#    <button type="submit">Upload</button>  #}
+{#</form>  #}
+{#  #}
+{#<div id="card-container">  #}
+{#    <!-- 卡片将会在这里动态添加 -->  #}
+{#</div>  #}
+{##}
+{##}
+{##}
+{#<!-- 示例卡片模板，用于克隆并填充数据 -->  #}
+{#<div id="card-template" style="display: none;">  #}
+{#    <div class="card">  #}
+{#        <p>File uploaded successfully!</p>  #}
+{#        <a href="#" class="card-link">View File</a>#}
+{#        <a href="{% url 'image_gallery' %}">View Gallery</a>#}
+{#    </div>  #}
+{#</div>#}
+{##}
+{#<!-- 在</body>标签之前引入jQuery -->  #}
+{#<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  #}
+{#<script>  #}
+{#$(document).ready(function() {  #}
+{#    // 为上传表单绑定提交事件  #}
+{#    $('#upload-form').on('submit', function(e) {  #}
+{#        // 阻止表单的默认提交行为  #}
+{#        e.preventDefault();  #}
+{#  #}
+{#        // 使用AJAX提交表单数据  #}
+{#        $.ajax({  #}
+{#            url: $(this).attr('action'), // 表单的action属性即提交地址  #}
+{#            type: 'POST',  #}
+{#            data: new FormData(this), // 使用FormData对象包装表单数据  #}
+{#            processData: false, // 告诉jQuery不要去处理发送的数据  #}
+{#            contentType: false, // 告诉jQuery不要去设置Content-Type请求头  #}
+{#            success: function(response) {  #}
+{#                // 表单提交成功后的回调函数  #}
+{#                // 假设服务器返回了一个包含链接的对象，例如：{ link: '/path/to/file' }  #}
+{#                var cardTemplate = $('#card-template').clone(); // 克隆卡片模板  #}
+{#                cardTemplate.find('.card-link').attr('href', response.link); // 设置链接的href属性  #}
+{#                $('#card-container').append(cardTemplate.show()); // 将卡片添加到容器中并显示  #}
+{#            },  #}
+{#            error: function(xhr, status, error) {  #}
+{#                // 处理错误情况  #}
+{#                console.error("Error uploading file: " + error);  #}
+{#            }  #}
+{#        });  #}
+{#    });  #}
+{#});  #}
+{#</script>#}

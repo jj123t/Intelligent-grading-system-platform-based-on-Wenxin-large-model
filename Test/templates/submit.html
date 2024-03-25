@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+    CodeManiacs | Submit
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class = "alert alert-info" style="text-align: center;" id="message-box"><p id="exit-message">Checking, please wait...</p></div>
+        <!--<div class = "alert alert-success alert-dismissable" style="text-align: center;">
+                <a href="#" class = "close" data-dismiss="alert" aria-label="close">&times;</a>
+            <p id="exit-message">Success!</p>
+        </div>-->
+        <button class="btn btn-warning" onclick="func()">Check</button>
+        <script>
+            function func(){
+              var x = 2;
+              if(x==1){
+                document.getElementById("exit-message").innerHTML="Yes!";
+                document.getElementById("message-box").className="alert alert-success";
+              }
+              else{
+                document.getElementById("exit-message").innerHTML="No!";
+                document.getElementById("message-box").className="alert alert-danger";
+              }
+            }
+        </script>
+    </div>
+{% endblock %}

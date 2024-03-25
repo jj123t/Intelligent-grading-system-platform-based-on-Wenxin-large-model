@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}
+    CodeManiacs | Thread
+{% endblock %}
+
+{% block inlineScripts %}
+    <style>
+        .roundedCorner{
+            border-radius: 10px;
+            background-color: #000;
+        }
+        .light{
+            border: 1px solid grey !important;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="margin-bottom:200px;">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="col-sm-12">
+                        <!-- <div class="page-header"> -->
+                                <h3>{{ question.question|capfirst }}</h3>
+                                <hr>
+                        <!-- </div> -->
+                        <div style="box-shadow: 7px 7px 30px rgba(0, 0, 0, .4); padding:0px;">
+                            <div class="panel-body" style="border:2px solid #d9534f; border-left:30px solid #d9534f;">
+                                    <span style="color:black">
+                                        {{ question.description }}
+                                        <br>
+                                        <a href="">#{{ question.tags }}</a>
+                                    </span>
+                                    <br><br>
+                                    <div class="pull-left">
+                                        <button class="btn btn-default"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-up"></span></button>
+                                        &emsp;<span style="font-size:150%">{{ question.rating }}</span>&emsp;
+                                        <button class="btn btn-default"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-down"></span></button>
+                                        <!--<button class="btn btn-default"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-up"></span>&emsp;{{ question.upVote }}</button>
+                                        <button class="btn btn-default"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-down"></span>&emsp;{{ question.downVote }}</button>-->
+                                    </div>
+                                    <div class="pull-right">
+                                        <strong>
+                                            <span style="font-size:120%; color:black;">
+                                                {{ question.author }}
+                                            </span>
+                                        </strong>
+                                        <br>
+                                        <span class="text-muted">
+                                            {{ question.dateCreated }}
+                                        </span>
+                                    </div>
+
+                            </div>
+                        </div>
+                        <div>
+                            <br><br>
+                            {% if answers.count == 1 %}
+                                <h4>{{ answers.count }} Answer</h4>
+                            {% else %}
+                                <h4>{{ answers.count }} Answers</h4>
+                            {% endif %}
+                            <hr class="light">
+                        </div>
+                        {% for answer in answers %}
+                            <div style="box-shadow: 7px 7px 30px rgba(0, 0, 0, .4); margin-bottom:25px;">
+                                <div class="panel-body" style=" border:2px solid #5bc0de; border-left:30px solid #5bc0de;">
+
+                                    <!-- <br><br> -->
+                                    <span style="color:black">
+                                        {{ answer.answer|safe }}
+                                    </span>
+                                    <br><br>
+                                    <div class="pull-left">
+                                        <button class="btn btn-default" onclick="return upVote();"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-up"></span></button>
+                                        &emsp;<span style="font-size:150%" id="rating">{{ answer.rating }}</span>&emsp;
+                                        <button class="btn btn-default" onclick="return downVote();"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-down"></span></button>
+                                        <!--<button class="btn btn-default"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-up"></span>&emsp;{{ answer.upVote }}</button>
+                                        <button class="btn btn-default"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-down"></span>&emsp;{{ answer.downVote }}</button>-->
+                                        <script>
+                                            /*function upVote(){
+                                                document.getElementById("rating").innerHTML = "";
+                                            }*/
+                                        </script>
+                                    </div>
+                                    <div class="pull-right">
+                                        <strong>
+                                            <span style="font-size:120%; color:black;">
+                                                {{ answer.author }}
+                                            </span>
+                                        </strong>
+                                        <br>
+                                        <span class="text-muted">
+                                            {{ answer.dateAnswered }}
+                                        </span>
+                                    </div>
+                                </div>
+                                <!--<div class="panel-footer" style="background-color:white">
+                                    answered at <span style="color:red">{{ answer.dateAnswered }}</span> by <strong>{{ answer.author }}</strong>
+                                </div>-->
+                            </div>
+                        {% endfor %}
+                        <form style="margin-top: 55px;" class="form-group" role="postAnswer" method="POST" action="/forums/thread/{{question.pk}}/answer/">
+                            {% csrf_token %}
+                            <label for="newAnswer">Your Answer : </label>
+                            <textarea type="text" name="newAnswer" class="form-control" id="newAnswer" rows="10" placeholder=""></textarea>
+                            <p class="help-block">
+                                <div class="alert alert-info">
+                                    <a href="#"  class="alert-link" data-toggle="modal" data-target="#help">Click to view how to write good answers.</a>
+                                </div>
+                            </p>
+                            <button type="submit" name="button" class="btn btn-primary">Submit</button>
+                        </form>
+                        <div class="modal fade" id="help" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="">Help</h4>
+                              </div>
+                              <div class="modal-body">
+                                <strong>You can write answers in html format. Some common formats are given below : </strong><br>
+                                <xmp><p> </p> #Write your paragraph</xmp>
+                                <xmp><strong> </strong> #Bold Text</xmp>
+                                <xmp><code> </code> #Code snippets</xmp>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="col-sm-12">
+                        <div class="page-header">
+                            <h4>Stats</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+{% endblock %}

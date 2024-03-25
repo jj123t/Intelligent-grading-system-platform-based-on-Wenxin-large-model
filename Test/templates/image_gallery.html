@@ -1,0 +1,9 @@
+<!-- image_gallery.html -->  
+<h1>Image Gallery</h1>  
+<ul>  
+    {% for image in images %}  
+    <li>  
+        <img src="{{ image.image.url }}" alt="{{ image.image.name }}" width="100">  
+    </li>  
+    {% endfor %}  
+</ul>

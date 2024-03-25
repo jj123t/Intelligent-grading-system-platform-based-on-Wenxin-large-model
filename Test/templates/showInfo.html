@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}学生评价{% endblock title %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-10">
+                <h3>学生评价</h3>
+                <p>姓名: {{ student.name }}</p>
+                <p>学号: {{ student.sid }}</p>
+                <!-- 评价列表 -->
+                {% if record %}
+                    <div class="record-list">
+                        {% for re in record %}
+                            <div class="record-item">
+                                <div class="record">
+                                    <p>subject: {{ re.course }}</p>
+                                </div>
+                                <div class="record-content">
+                                    <p>{{ re.grade }}</p>
+                                </div>
+                            </div>
+                            <hr> <!-- 分隔线 -->
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>暂无评价记录。</p>
+                {% endif %}
+
+                {% if evaluations %}
+                    <div class="evaluation-list">
+                        {% for ev in evaluations %}
+                            <div class="evaluation-item">
+                                <div class="evaluation">
+                                    <p>subject: {{ ev.subject }}</p>
+                                </div>
+                                <div class="ev-content">
+                                    <p>content: {{ ev.comment }}</p>
+                                </div>
+                            </div>
+                            <hr> <!-- 分隔线 -->
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>暂无评价记录。</p>
+                {% endif %}
+
+            </div>
+
+
+            <form id="evaluationForm" action="submitview/" method="post" enctype="multipart/form-data">
+                <!-- 表单内容，包括任何文件输入、文本输入等 -->
+                <label for="evaluator_type">评价类型:</label>
+                <select id="evaluator_type" name="evaluator_type">
+                    <option value="1">自我评价</option>
+                    <option value="2">教师评价</option>
+                </select>
+
+                <br>
+                <label for="subject">评价科目:</label>
+                <textarea id="subject" name="subject" rows="4" cols="50"></textarea>
+                <br>
+
+                <br>
+                <label for="comment">评价内容:</label>
+                <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
+                <br>
+
+                <button id="myButton" type="button">上传</button>
+            </form>
+
+            <script>
+                function submitForm() {
+                    var form = document.getElementById('evaluationForm');
+                    var formData = new FormData(form);
+
+                    // 发送AJAX请求到Django后端  
+                    fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-CSRFToken': csrftoken, // 如果有CSRF保护，请确保设置CSRF token  
+                        },
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log(data);
+                            // 处理响应，比如显示消息给用户  
+                            // 可以更新页面上的某些元素，例如：  
+                            // document.getElementById('some-element').textContent = data.message;  
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            // 可以显示错误给用户  
+                        });
+                }
+
+                // 获取CSRF token（如果您正在使用Django的CSRF保护）  
+                function getCookie(name) {
+                    var cookieValue = null;
+                    if (document.cookie && document.cookie !== '') {
+                        var cookies = document.cookie.split(';');
+                        for (var i = 0; i < cookies.length; i++) {
+                            var cookie = cookies[i].trim();
+                            // 如果cookie字符串以name="开头  
+                            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                break;
+                            }
+                        }
+                    }
+                    return cookieValue;
+                }
+                var csrftoken = getCookie('csrftoken');
+                // 为按钮添加点击事件监听器  
+                document.getElementById('myButton').addEventListener('click', submitForm);
+            </script>
+
+
+
+        </div>
+    </div>
+{% endblock content %}
+
