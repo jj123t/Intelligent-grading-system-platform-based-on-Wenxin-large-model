@@ -1,5 +1,11 @@
-<!-- upload_form.html -->  
-  
+{% extends "base.html" %}
+{% load static %}
+{% block title %}学生评价{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-md-center">
+
 <!-- upload.html -->  
 <form method="post" enctype="multipart/form-data" id="upload-form">    
     {% csrf_token %}    
@@ -101,3 +107,6 @@ document.getElementById('upload-form').addEventListener('submit', function(e) {
 {#    });  #}
 {#});  #}
 {#</script>#}
+                    </div>
+    </div>
+{% endblock content %}

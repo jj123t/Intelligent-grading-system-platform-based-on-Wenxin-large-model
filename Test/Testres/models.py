@@ -140,7 +140,7 @@ class Evaluation(models.Model):
     comment = models.TextField(verbose_name='评价内容')
 
     def __str__(self):
-        return f"{self.get_evaluator_type_display()} - {self.student.name} - {self.subject.name}"
+        return f"{self.get_evaluator_type_display()} - {self.student.name}"
 
 
 # # 文件表
