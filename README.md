@@ -13,7 +13,7 @@
    python manage.py migrate
 5. 管理员注册
    python manage.py createsuperuser
-
+Test为程序主目录，chat文件夹为文心一言模块，未加入程序
 ![Image text](https://github.com/jj123t/Intelligent-grading-system-platform-based-on-Wenxin-large-model/blob/a71c29bc8201053dd30fccb9a32575bd74b4af5c/img/codeview.png)
 
 ![Image text](https://github.com/jj123t/Intelligent-grading-system-platform-based-on-Wenxin-large-model/blob/a71c29bc8201053dd30fccb9a32575bd74b4af5c/img/indexView.png)
